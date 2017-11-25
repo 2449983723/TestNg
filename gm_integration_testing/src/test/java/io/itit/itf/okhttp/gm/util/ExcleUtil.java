@@ -21,7 +21,7 @@ public class ExcleUtil {
     private static XSSFWorkbook excelWBook;
     private static XSSFCell cell;
     private static XSSFRow row;
-    private static String excelFilePath="C:\\C\\TEST1.xlsx";
+    private static String excelFilePath="C:\\Users\\dell\\Desktop\\test.xlsx";
 
     // 设定要设置的Excel的文件路径和Excel 中Sheet名；
     // 在读/写Excel 的时候先要调用此方法
@@ -43,11 +43,11 @@ public class ExcleUtil {
         }
 
     }
+    
     /*
      * 读取excle文件指定单元格的函数 ；
      * 
      */
-
     public static String getCell(int row, int col) throws Exception {
 
         try {
@@ -70,12 +70,12 @@ public class ExcleUtil {
         }
 
     }
+    
     /*
      * 在Excle中执行单元格写入数据；
      * 
      * 
      */
-
     public static void setCellData(int rownum, int colnum, String Result) throws Exception {
 
         try {

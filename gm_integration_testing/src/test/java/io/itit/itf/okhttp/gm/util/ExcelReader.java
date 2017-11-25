@@ -29,19 +29,6 @@ public class ExcelReader {
         this.load();
     }
 
-    public static void main(String[] args) {
-        Object[][] obj1;
-        ExcelReader eh = new ExcelReader("C:\\Users\\dell\\Desktop\\test.xlsx", "Sheet1");
-        Object[][] sheetData2 = eh.getSheetData2();
-        System.out.println("length:" + sheetData2.length);
-        for (int i = 0; i < sheetData2.length; i++) {
-            for (int j = 0; j < sheetData2[i].length; j++) {
-                System.out.print(sheetData2[i][j] + " | ");
-            }
-            System.out.println();
-        }
-    }
-
     private void load() {
         FileInputStream inStream = null;
         try {
@@ -105,7 +92,6 @@ public class ExcelReader {
     }
 
     private void getSheetData() {
-
         listData = new ArrayList<>();
         mapData = new ArrayList<>();
         columnHeaderList = new ArrayList<>();
@@ -135,13 +121,6 @@ public class ExcelReader {
         }
 
         flag = true;
-
-        for (int i = 0; i < listData.size(); i++) {
-            for (int j = 0; j < listData.get(i).size(); j++) {
-                System.out.println(listData.get(i).get(j).toString());
-            }
-        }
-
     }
 
     public String getCellData(int row, int col) {
@@ -207,10 +186,10 @@ public class ExcelReader {
             listData.add(list);
         }
    
-        results = new Object[result.size()][];
+        results = new Object[result.size()-1][];
 
-        for (int i = 0; i < result.size(); i++) {
-            results[i] = result.get(i);
+        for (int i = 1; i < result.size(); i++) {
+            results[i-1] = result.get(i);
         }
         flag = true;
 
