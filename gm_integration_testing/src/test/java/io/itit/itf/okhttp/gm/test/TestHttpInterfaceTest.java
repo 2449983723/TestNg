@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 import java.text.SimpleDateFormat;
@@ -63,6 +64,23 @@ public class TestHttpInterfaceTest {
         }
 	}
 	
+	private JSONObject sendGetRequest(String url, String params) {
+		try {
+			response = FastHttpClient.get().url(stationUrl + url + "?" + params)
+					.addHeader("cookie", "sessionid=" + cookie + ";" + "group_id=" + group_id)
+					.build().execute();
+			logger.info("===============");
+			String responseString = response.string();
+			logger.info("response.string: "+ responseString);
+			JSONObject resObj = JSONObject.fromObject(responseString);
+			logger.info("=================");
+			return resObj;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
     @BeforeTest
     public void init() {
     	login();
@@ -84,7 +102,11 @@ public class TestHttpInterfaceTest {
     	except = (String) obj[3];
         System.out.println("url=" + url + "  requestType=" + 
         		requestType + "  parameters=" + parameters + "  except=" + except);
-
+        if (requestType.contentEquals("get")) {
+        	JSONObject resObj = sendGetRequest(url, parameters);
+			assertEquals(resObj.getString("msg"), except, "获取运营时间失败");
+        }
+        
     }
 
     @DataProvider
