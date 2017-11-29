@@ -24,7 +24,7 @@ import java.util.Date;
 /**
  * Created by  on 2017/9/5.
  */
-public class TestHttpInterfaceTest {
+public class ExcelTest {
     static ExcleUtil excleUtil;
     ExcelReader ex;
     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -93,18 +93,19 @@ public class TestHttpInterfaceTest {
         String requestType = "";
         String parameters = "";
         String except = "";
-        String contents = "";
-        String times = "";
+        String error_tip = "";
 
     	url = (String) obj[0];
     	requestType = (String) obj[1];
     	parameters = (String) obj[2];
     	except = (String) obj[3];
+    	error_tip = (String) obj[4];
+    	
         System.out.println("url=" + url + "  requestType=" + 
         		requestType + "  parameters=" + parameters + "  except=" + except);
         if (requestType.contentEquals("get")) {
         	JSONObject resObj = sendGetRequest(url, parameters);
-			assertEquals(resObj.getString("msg"), except, "获取运营时间失败");
+			assertEquals(resObj.getString("msg"), except, error_tip);
         }
         
     }
